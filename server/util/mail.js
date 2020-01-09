@@ -8,8 +8,8 @@ async function main(mail,verCode) {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: "teammonserrat303@gmail.com", // generated ethereal user
-      pass: "Mons303#" // generated ethereal password
+      user: "mauriciogallegoavi@gmail.com", // generated ethereal user
+      pass: "enrique15978285" // generated ethereal password
     }
   });
   transporter.verify(function (error, success) {
@@ -27,7 +27,7 @@ async function main(mail,verCode) {
     to: mail, // list of receivers
     subject: "Verification Code", // Subject line
     text: '', // plain text body
-    html: `<p>${verCode}</p>`
+    html: `<p>Hola. tu codigo de verificacion es :${verCode}</p>`
   });
 }
 /* main().catch(console.error); */

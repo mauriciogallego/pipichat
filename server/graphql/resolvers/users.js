@@ -42,41 +42,24 @@ module.exports = {
         }
     },
     Mutation: {
-        async login(_, {name, password}){
-            const {errors, valid} = validateLoginInput(name, password)
-            if(!valid){
-                throw new UserInputError('Errors!', { errors })
-            }
-            
-            const user = await User.findOne({ name })
-            if(!user)
-            {
-                errors.general = 'User not found!'
-                throw new UserInputError('User not found!', { errors })
-            }
-
-            const match = await bcrypt.compare(password, user.password)
-            if(!match)
-            {
-                errors.general = 'Wrong credentials!'
-                throw new UserInputError('Wrong credentials!', { errors })
-            }
-
-            const token = generateToken(user)
-
-            return{
-                ...user._doc,
-                id: user._id,
-                token
-            }
-        },
-        async register(_, { input: { mail } }) {
-            
+        async validationCode(_, { input: { mail } }) {
             let verCode = GenerateCode(5);
-            console.log(verCode,mail)
-            timeCodeOut(verCode,mail)
+            sendMail(mail,verCode);
+            timeCodeOut(verCode,mail);
             return {message: "code sent"}
-
+        },
+        async signUp(_,{input: {mail, codeVerification}}){
+          let existCode = globalCodes.find(Element => Element.mail === mail && Element.codeVerification === codeVerification)
+          if (!existCode){
+            let resultId = User.findOne({ 'email': mail })
+              .then(usuario => usuario._id)
+            return {
+              message: "OK",
+              id: resultId
+            }
+          }else{
+            return { message: "Error code", id:'' }
+          }
         }
     }
 }
