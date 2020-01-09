@@ -1,0 +1,16 @@
+.chatHeaderContainer {
+  height: 100%;
+}
+
+.otherUserName {}
+
+.otherUserImg {
+  background-color: rgba(255, 255, 255, 0);
+  height          : 40px;
+  width           : 40px;
+  position        : relative;
+  top             : 25%;
+  left            : 0;
+  margin          : 0;
+  border-radius   : 50%;
+}

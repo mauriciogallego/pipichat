@@ -1,0 +1,36 @@
+.userCardContainerRow {
+  height: 77px;
+}
+
+.userCardContainer {
+  background-color: #F26419;
+}
+
+.chatListContainerRow {
+  height    : 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 500px;
+}
+
+.chatListContainer {
+  background-color: #2F4858;
+}
+
+.chatHeaderContainerRow {
+  height: 77px;
+}
+
+.chatHeaderContainer {
+  background-color: #F6AE2D;
+}
+
+.chatContentContainerRow {
+  height: 500px;
+}
+
+.chatContentContainer {
+  background-color: #55DDE0;
+  overflow-y      : scroll;
+  max-height      : 500px;
+}

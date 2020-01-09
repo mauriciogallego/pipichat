@@ -1,0 +1,37 @@
+#SideBarContainer{
+
+    width:20vw;
+}
+
+h5{
+    padding:0.25em;
+}
+
+#userName{
+    font-size: medium;
+    padding-top:1%;
+
+}
+#tabUserPic{
+    height:8vh;
+    float: left;
+    background-color: rgb(116, 161, 196);
+    border-radius: 50%;
+    margin-left:7%;
+    margin-top:3%;
+}
+
+#chatTab{
+    padding:0.5%;
+    opacity:0.9;
+    margin:05%;
+    text-align: center;
+    background:#33658A;
+    box-shadow: 1.5px 1px 1px rgb(22, 44, 61);
+    width:100%;
+    
+}
+
+.lastMsg{
+  color:rgb(116, 161, 196);
+}
