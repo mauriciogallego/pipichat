@@ -8,16 +8,15 @@ module.exports = gql`
     }
     
     type Message{
-        id: ID
-        author: User!
+        createdAt: String
+        author: String!
         text: String!
-        read: [Read]!
     }
 
     type Chat{
         id: ID!
         createdAt: String
-        members: [User]!
+        members: [String]
         name: String
         messages: [Message]
     }
@@ -43,18 +42,16 @@ module.exports = gql`
     }
 
     input CreateChatInput {
-        id: ID!
-        createdAt: String
-        members: [ID]!
+        members: [String]
         name: String
-        messages: [ID]
 
     }
 
     input CreateMessageInput {
-        author: ID!
-        text: String!
-        read: [ID]!
+        author: String
+        text: String
+        chatID: ID!
+    
     }
 
     input CreateReadInput {
@@ -77,4 +74,8 @@ module.exports = gql`
         updateRead(input: CreateReadInput): Read!
 
     }
+
+type Subscription {
+  messageAdded(something: String!): Message
+}
 `
