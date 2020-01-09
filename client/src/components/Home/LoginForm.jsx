@@ -22,15 +22,19 @@ const LoginForm = props => {
 
   console.log(enteredEmail, enteredPassword);
 
-  const [emailHandler] = useMutation(POST_MUTATION, {
+  const [emailMutation] = useMutation(POST_MUTATION, {
     variables: {
       input: { mail: enteredEmail }
     },
     errorPolicy: "all"
   });
-  /*     const emailHandler = (value)=>{
+
+
+  const emailHandler = (value)=>{ 
+      emailMutation();
+      setEmail()
         
-    } */
+    } 
 
   const submitHandler = event => {
     event.preventDefault();
@@ -52,16 +56,11 @@ const LoginForm = props => {
               onChange={event => {
                 setEnteredEmail(event.target.value);
               }}
-            />
+            /> 
+            <Button onClick={() => emailHandler()} type="submit" > Send Me Code </Button>
           </Form.Group>
 
-          {withEmail === false ? (
-            <>
-              <div className="btn" onClick={() => emailHandler()}>
-                <p>Send Me Code</p>
-              </div>
-            </>
-          ) : (
+           
             <>
               {" "}
               <Form.Group controlId="formBasicPassword">
@@ -81,7 +80,7 @@ const LoginForm = props => {
                 </div>
               </Link>
             </>
-          )}
+        
         </Form>
       </div>
     </div>

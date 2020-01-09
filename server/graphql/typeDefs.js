@@ -1,27 +1,67 @@
 const { gql } = require('apollo-server')
 
 module.exports = gql`
-    type Chat{
+    type Read{
         id: ID
-        body: String
-        createdAt: String
-        name: String
+        checked: Boolean!
+        user: ID
     }
+    
+    type Message{
+        id: ID
+        author: User!
+        text: String!
+        read: [Read]!
+    }
+
+    type Chat{
+        id: ID!
+        createdAt: String
+        members: [User]!
+        name: String
+        messages: [Message]
+    }
+
+
     type User{
         id: ID
         token: String
         email: String
         name: String
-        password: String
         phone: Int
         createdAt: String
+        reading: Chat
     }
-    input RegisterInput{
-        mail: String!
-    }
+
     type registerMessage{
         message: String
     }
+
+
+    input RegisterInput{
+        mail: String!
+    }
+
+    input CreateChatInput {
+        id: ID!
+        createdAt: String
+        members: [ID]!
+        name: String
+        messages: [ID]
+
+    }
+
+    input CreateMessageInput {
+        author: ID!
+        text: String!
+        read: [ID]!
+    }
+
+    input CreateReadInput {
+        checked: Boolean!
+        user: ID
+    }
+ 
     type Query{
         getUsers: [User]
         getUser(userId: ID!): User
@@ -31,7 +71,10 @@ module.exports = gql`
     type Mutation{
         register(input: RegisterInput): registerMessage
         login(name: String!, password: String!): User!
-        createChat(body: String!): Chat!
+        createChat(input: CreateChatInput): Chat!
         deleteChat(chatId: ID!): String!
+        createMessage(input: CreateMessageInput): Message!
+        updateRead(input: CreateReadInput): Read!
+
     }
 `
