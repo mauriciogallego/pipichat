@@ -28,9 +28,13 @@ const LoginForm = props => {
     },
     errorPolicy: "all"
   });
-  /*     const emailHandler = (value)=>{
-        
-    } */
+
+  const [checkHandler] = useMutation(POST_MUTATION, {
+    variables: {
+      input: { mail: enteredEmail }
+    },
+    errorPolicy: "all"
+  });
 
   const submitHandler = event => {
     event.preventDefault();
@@ -57,7 +61,7 @@ const LoginForm = props => {
 
           {withEmail === false ? (
             <>
-              <div className="btn" onClick={() => emailHandler()}>
+              <div className="btn" onClick={() =>{ emailHandler(); setEmail(!withEmail);}}>
                 <p>Send Me Code</p>
               </div>
             </>
@@ -93,9 +97,17 @@ LoginForm.propTypes = {};
 export default LoginForm;
 
 const POST_MUTATION = gql`
-  mutation register($input: RegisterInput) {
-    register(input: $input) {
+  mutation validationCode($input: RegisterInput) {
+    validationCode(input: $input) {
       message
     }
   }
 `;
+
+const POST_MUTATION_VALIDATION = gql`
+mutation signUp ( $input: RegisterInput){
+  signUp(input: $input){
+    message
+  }
+}
+`
